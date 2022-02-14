@@ -1,0 +1,190 @@
+@font-face {
+    font-family: 'Belfort';
+    src: url(belfortregular.ttf);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 5rem;
+    margin-top: 1rem;
+}
+
+h1 {
+    font-size: 6rem;
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 700;
+    font-style: italic;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+.span {
+    width: 450px;
+    margin: 0 auto;
+    font-size: .9rem;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    width: 95%;
+    border: 1px solid silver;
+    padding: .7em;
+}
+
+.fa-solid {
+    color:rgb(194, 144, 45);
+}
+
+.fa-magnifying-glass {
+    font-size: 1.1rem;
+}
+
+.fa-chevron-down {
+    font-size: .8rem;
+}
+
+.search-btn {
+    border-right: 1px solid silver;
+}
+
+.search-btn button {
+    padding: .6em 3.5em .6em 2em;
+}
+
+.challenge-btn {
+    border-left: 1px solid silver;
+}
+
+.challenge-btn button {
+    padding: .6em 2em .6em 3.5em;
+}
+
+.btn-contain {
+    height: 100%;
+    position: relative;
+}
+
+.btn-contain::after {
+    transition: 500ms;
+    content: "";
+    background-color: rgb(194, 144, 45);
+    width: 2.5%;
+    height: 3px;
+    opacity: 0;
+    position: absolute;
+    bottom: -3px;
+    left: 9%;
+}
+
+.middle-btns {
+    display: flex;
+    justify-content: center;
+}
+
+.middle-btns button {
+    padding: .6em;
+    color: silver;
+    transition: color .3s;
+}
+
+.middle-btns button:hover {
+    color: #000;
+}
+
+.btn-contain:hover::after {
+    width: 79%;
+    opacity: 1;
+}
+
+.all-btn {
+    border-bottom: 3px solid rgb(194, 144, 45);
+}
+
+.all-btn button {
+    color: #000;
+}
+
+.middle-btns button, .side-btns button {
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid transparent;
+    text-transform: uppercase;
+    letter-spacing: 1.1px;
+    font-size: .6rem;
+}
+
+.contain {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    width: 92%;
+    background: red;
+    margin: 1.5rem auto;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.card {
+    width: 225px;
+    position: relative;
+    cursor: pointer;
+}
+
+.card-img {
+    position: relative;
+    overflow: hidden;
+}
+
+.imgs {
+    width: 225px;
+    height: 320px;
+    object-fit: cover;
+    transition: .7s ease;
+}
+
+.img-overlay {
+    /* 20, 89, 116 -- USE FOR WHEN HOVERED */
+    background: rgb(6, 28, 37);
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    color: white;
+    padding: .65em;
+    transition: background .4s;
+}
+
+.img-overlay p {
+    padding-left: .4em;
+    text-transform: uppercase;
+    font-style: italic;
+    transition: padding .4s;
+    font-size: 1.3rem;
+    font-weight: 700;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+.card:hover .img-overlay {
+    background: rgb(20, 89, 116)
+}
+
+.card:hover .img-overlay p {
+    padding-left: .9em;
+}
+
+.card:hover .imgs {
+    transform: scale(1.04);
+}
