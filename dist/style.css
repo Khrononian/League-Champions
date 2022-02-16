@@ -1,9 +1,6 @@
-@font-face {
-    font-family: 'Belfort';
-    src: url(belfortregular.ttf);
-}
-
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;900&display=swap');
 
 * {
     padding: 0;
@@ -17,14 +14,14 @@ header {
     margin-top: 1rem;
 }
 
-h1 {
+header h1 {
     font-size: 6rem;
     font-family: 'Noto Sans', sans-serif;
     font-weight: 700;
     font-style: italic;
 }
 
-h3 {
+header h3 {
     font-size: 1.5rem;
 }
 
@@ -64,6 +61,7 @@ nav {
 
 .search-btn button {
     padding: .6em 3.5em .6em 2em;
+    align-self: center;
 }
 
 .challenge-btn {
@@ -138,10 +136,14 @@ nav {
     gap: 30px;
 }
 
+a {
+    cursor: pointer;
+}
+
 .card {
     width: 225px;
     position: relative;
-    cursor: pointer;
+    pointer-events: none;
 }
 
 .card-img {
@@ -177,14 +179,400 @@ nav {
     font-family: 'Noto Sans', sans-serif;
 }
 
-.card:hover .img-overlay {
+a:hover .card .img-overlay {
     background: rgb(20, 89, 116)
 }
 
-.card:hover .img-overlay p {
+a:hover .card .img-overlay p {
     padding-left: .9em;
 }
 
-.card:hover .imgs {
+a:hover .imgs {
     transform: scale(1.04);
+}
+
+
+
+.header {
+    position: relative;
+    background: rgb(0, 9, 19);
+}
+
+.blur-splash {
+    width: 100%;
+    filter: blur(5px)
+}
+
+.champ-splash {
+    max-width: 100%;
+    position: absolute;
+    left: 50%;
+    bottom: 50%;
+    transform: translate(-50%, 50%)
+}
+
+.champ-list-btn {
+    position: absolute;
+    top: 9%;
+    right: 3%;
+}
+
+.champ-btn {
+    padding: .65em 1.4em;
+    background: black;
+    opacity: .8;
+    color: white;
+    text-transform: uppercase;
+    border: 1px solid lightseagreen;
+    cursor: pointer;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 600;
+    font-size: .7rem;
+    letter-spacing: .5px;
+}
+
+.fa-shield-blank {
+    margin-left: .5rem;
+    color: white;
+    font-size: .8rem;
+}
+
+
+
+.champion-header {
+    width: 100%;
+    background: rgb(0, 9, 19);
+    padding: 3.5em 0;
+    color: white;
+}
+
+.champion-box {
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
+}
+
+.champion-name {
+    position: absolute;
+    top: -19%;
+    right: 50%;
+    transform: translate(50%, -62%);
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    width: 100%;
+    font-style: italic;
+    text-transform: uppercase;
+    font-family: 'Merriweather', serif;
+}
+
+.champion-name::before {
+    display: block;
+    content: "";
+    height: 1px;
+    flex: 2 0 0;
+    border-top: 1px solid silver;
+}
+
+.champion-name::after {
+    display: block;
+    content: "";
+    height: 1px;
+    flex: 2 0 0;
+    border-top: 1px solid silver;
+}
+
+.champion-name h3 {
+    font-size: 1.8rem;
+    font-weight: 500;
+    font-family: 'Rubik', sans-serif;
+}
+
+.champion-name h1 {
+    font-size: 6rem;
+    font-weight: 900;
+    font-family: 'Merriweather', serif;
+}
+
+.champion-info {
+    display: flex;
+    border-right: 1px solid silver;
+    border-left: 1px solid silver;
+    border-bottom: 1px solid silver;
+    padding: 2em;
+}
+
+
+
+.champion-boxes{
+    text-align: center;
+    flex-direction: column;
+}
+
+.champion-boxes h5 {
+    text-transform: uppercase;
+    font-size: .65rem;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+.champion-boxes > :last-child {
+    color: rgb(208, 168, 92)
+}
+
+.champion-role img {
+    width: 28px;
+}
+
+.champion-difficulty > div > i {
+    color: lightseagreen;
+}
+
+.champion-difficulty > div {
+    margin-bottom: 1rem;
+}
+
+.champion-challenge {
+    border-right: 1px solid silver;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.champion-lore {
+    justify-content: space-between;
+    
+}
+
+.champion-lore p {
+    font-size: .9rem;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+.champion-challenge, .champion-lore {
+    display: flex;
+    
+    width: 50%;
+}
+
+.champion-info > div {
+    padding: .5em 3em;
+}
+
+.box-footer {
+    display: flex;
+    justify-content: center;
+    padding: .75em;
+    width: 100%;
+    border-left: 1px solid silver;
+    border-right: 1px solid silver;
+    border-bottom: 1px solid silver;
+}
+
+.box-footer div p {
+    color:rgb(126, 126, 126);
+    cursor: default;
+    
+}
+
+.box-footer div {
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.box-footer > * {
+    font-size: .65rem;
+    text-transform: uppercase;
+
+}
+
+.box-footer a {
+    color: white;
+    text-decoration: unset;
+}
+
+.box-footer a:hover {
+    text-decoration: underline;
+}
+
+
+
+.champion-abilities {
+    background: rgb(0, 9, 19);
+    background-image: url('../dist/FontIcons/fighterbackground.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 40%;
+    color: white;
+    padding: 5em;
+    height: 700px;
+}
+
+.ability-contain {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 1em 1.5em 2em 1.5em;
+    max-width: 100%;
+}
+
+.ability-list {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
+.ability-list div {
+    position: relative;
+}
+
+.ability-list h2 {
+    margin-bottom: 4rem;
+    font-family: 'Merriweather', serif;
+    font-style: italic;
+    font-weight: 900;
+    font-size: 3.5rem;
+    text-transform: uppercase;
+}
+
+.ability-list > :nth-child(2) {
+    display: flex;
+    justify-content: space-between;
+    width: 450px;
+    margin-bottom: 3rem;
+}
+
+.ability-list > :nth-child(2) button {
+    background: transparent;
+    cursor: pointer;
+    border-color: transparent;
+}
+
+.ability-btn {
+    transition: transform ease .4s;
+    background: red;
+}
+
+.ability-btn:hover {
+    transform: translate(0, -10px);
+}
+
+.ability-info {
+    width: 400px;
+    padding-left: 1.7rem;
+    font-family: 'Rubik', sans-serif;
+    letter-spacing: .05em;
+    line-height: 1.4;
+}
+
+.ability-info h6 {
+    color:rgb(126, 126, 126);
+    font-size: .6rem;
+}
+
+.ability-info h6, .ability-info h4 {
+    text-transform: uppercase;
+}
+
+.ability-info p {
+    font-size: .82rem;
+    margin-top: .5rem;
+}
+
+.ability-showcase video {
+    max-width: 100%;
+}
+
+
+
+.skin-contain {
+    width: 82%;
+    max-width: 100%;
+    margin: 3rem auto;
+    position: relative;
+    /* height: 665px; */
+    
+}
+
+.side-bar, .side-overlay {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 400px;
+    height: 100%;
+    background: transparent;
+    padding: 2.5em;
+    overflow: hidden;
+    backdrop-filter: blur(8px);
+
+}
+
+.side-overlay {
+    background:rgb(0, 9, 19);
+    opacity: .7;
+}
+
+.side-bar h4 {
+    color: white;
+    padding-bottom: .5em;
+    border-bottom: 1px solid rgb(126, 126, 126);
+    text-transform: uppercase;
+    font-weight: 900;
+    font-style: italic;
+    font-size: 2.2rem;
+    font-family: 'Merriweather', serif;
+}
+
+.champion-splash {
+    width: 100%;
+    height: 100%;
+}
+
+.splash-icon {
+    width: 130px;
+}
+
+.skin-btns {
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    cursor: pointer;
+    margin-top: 3rem;
+}
+
+.skin-btns div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    /* width: 150px; */
+    width: 100%;
+
+}
+
+.skin-btn {
+    cursor: pointer;
+}
+
+.skin-btn img, .skin-btn h5 {
+    transition: all ease .4s;
+}
+
+.skin-btn:hover img {
+    transform: scale(1.09);
+}
+
+.skin-btn:hover h5 {
+    color: white;
+}
+
+.skin-btns div h5 {
+    color:rgb(126, 126, 126);
+    margin-left: 1rem;
+    width: 100%;
+    text-transform: uppercase;
 }
