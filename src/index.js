@@ -1,5 +1,4 @@
-import { championId } from './displayData';
-import { sendToChampionPage } from './displayData'
+import  sendToChampionPage  from './displayData'
 
 
 // setInterval(() => console.log(championId), 1000)
@@ -54,8 +53,7 @@ const loadGridDivs = () => {
         cardImg.appendChild(divOverlay);
         divOverlay.appendChild(p);
 
-        a.href = './Champions/Champion.html'
-        a.id = 'CHICKEN'
+        a.id = ''
         cardDiv.classList.add('card');
         cardImg.classList.add('card-img');
         divOverlay.classList.add('img-overlay');
@@ -64,20 +62,25 @@ const loadGridDivs = () => {
         a.addEventListener('click', sendToChampionPage)
     }
     
-    // getChampionNames.then(response => response.json())
-    // .then(data => {
-    //     const getPTags = document.querySelectorAll('p');
-    //     const aTags = document.querySelectorAll('a')
+    document.querySelector('.skin-contain').style.height = document.querySelector('.champion-splash').offsetHeight + 'px'
+    document.querySelector('.header').style.display = 'none';
+    document.querySelector('.champion-header').style.display = 'none'
+    document.querySelector('.champion-abilities').style.display = 'none'
+    document.querySelector('.champion-skins').style.display = 'none'
 
-    //     for (let i = 0; i < data.champ_names.length; i++) {
-    //          if (data.champ_names[i] != 'Kled & Skaarl' && data.champ_names[i] != 'Mega Gnar') {
-    //             getPTags[i].innerText = data.champ_names[i] 
-    //             aTags[i].id = getPTags[i].innerText
+    getChampionNames.then(response => response.json())
+    .then(data => {
+        const getPTags = document.querySelectorAll('p');
+        const aTags = document.querySelectorAll('a')
 
-    //         }
-    //         else getPTags[i].parentElement.parentElement.parentElement.remove()
-    //     }
-    // })
+        for (let i = 0; i < data.champ_names.length; i++) {
+             if (data.champ_names[i] != 'Kled & Skaarl' && data.champ_names[i] != 'Mega Gnar') {
+                getPTags[i].innerText = data.champ_names[i] 
+                aTags[i].id = getPTags[i].innerText
+            }
+            else getPTags[i].parentElement.parentElement.parentElement.parentElement.remove()
+        }
+    })
 
     // getChampionImages
     // .then(data => {
@@ -105,24 +108,109 @@ const loadGridDivs = () => {
     // }).catch(error => console.log(error))
 
 }
-const gatherData = (index) => {
-    // const getChampionData = fetch(`https://league-of-legends-champions.p.rapidapi.com/champions/%7Blang%7D/${index.path[3].id}`, {
-    //     "method": "GET",
-    //     "headers": {
-    //         "x-rapidapi-host": "league-of-legends-champions.p.rapidapi.com",
-    //         "x-rapidapi-key": "d5c7b459b7msh3709ab41febef03p1d7c75jsn6c10d4ece44d"
-    //     }
-    // }).then(response => response.json())
+const gatherData = index => {
+    const getChampionData = fetch(`https://league-of-legends-champions.p.rapidapi.com/champions/en-us/${index.path[0].id}`, {
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "league-of-legends-champions.p.rapidapi.com",
+            "x-rapidapi-key": "d5c7b459b7msh3709ab41febef03p1d7c75jsn6c10d4ece44d"
+        }
+    }).then(response => response.json())
+    .then(data => {
+        console.log(data)
+        const champData = data.champion[0]
+        const links = document.querySelectorAll('.link');
+        const skinIcons = document.querySelectorAll('.splash-icon');
+        const backgrounds = document.querySelector('.champion-abilities')
 
-    return index.path[3].id
+        document.querySelector('.blur-splash').src = champData['champion_splash']
+        document.querySelector('.champ-splash').src = champData['champion_splash']
+        document.querySelector('.champion-container').firstElementChild.innerText = champData['champion_title'].toUpperCase()
+        document.querySelector('.champion-container').lastElementChild.innerText = champData['champion_name'].toUpperCase()
+        document.querySelector('.champion-role').lastElementChild.innerText = champData['recommended_roles'][0]
+        document.querySelector('.champion-lore').firstElementChild.innerText = champData['lore']
+        for (let i = 0; i < links.length; i++) {
+            links[i].href = champData['links'][i].href
+        }
+        document.getElementById('champion_passive').src = champData['champion_passive'].champion_passive_icon
+        document.querySelector('.ability-info').querySelector('h4').innerText = champData['champion_passive'].champion_passive_name
+        document.querySelector('.description').innerText = champData['champion_passive'].champion_passive_description
+        document.querySelector('video').firstElementChild.src = champData['champion_passive'].champion_passive_video_mp4
+        document.querySelector('video').lastElementChild.src = champData['champion_passive'].champion_passive_video_webm
+        document.getElementById('champion_q').src = champData['champion_q'].champion_q_icon
+        document.getElementById('champion_w').src = champData['champion_w'].champion_w_icon
+        document.getElementById('champion_e').src = champData['champion_e'].champion_e_icon
+        document.getElementById('champion_r').src = champData['champion_r'].champion_r_icon
+        
+        switch (champData['recommended_roles'][0]) {
+            case 'Mage':
+                console.log('MAGE');
+                backgrounds.backgroundImage = `url('../dist/FontIcons/magebackground.svg')`
+            break;
+            case 'Assassin':
+                console.log('ASSASSIN');
+                backgrounds.backgroundImage = `url('../dist/FontIcons/assassinbackground.svg')`
+            break;
+            case 'Fighter':
+                console.log('FIGHTER');
+                backgrounds.backgroundImage = `url('../dist/FontIcons/fighterbackground.svg')`
+            break;
+            case 'Tank':
+                console.log('TANK');
+                backgrounds.backgroundImage = `url('../dist/FontIcons/tankbackground.svg')`
+            break;
+            case 'Marksman':
+                console.log('MARKSMAN');
+                backgrounds.backgroundImage = `url('../dist/FontIcons/marksmanbackground.svg')`
+            break;
+            case 'Support':
+                console.log('SUPPORT');
+                backgrounds.backgroundImage = `url('../dist/FontIcons/supportbackground.svg')`
+            break;
+        }
+
+        document.querySelector('video').load()
+        document.querySelector('video').play()
+
+
+        document.querySelector('.champion-splash').src = champData['champion_splash']
+        if (champData['skins'].length > skinIcons.length) {
+            console.log('GREATER');
+            let difference = champData['skins'].length - skinIcons.length;
+
+            for (let i = 0; i < difference; i++) {
+                const div = document.createElement('div');
+                const img = document.createElement('img');
+                const h5 = document.createElement('h5');
+
+                document.querySelector('.skin-btns').appendChild(div);
+                div.appendChild(img);
+                div.appendChild(h5);
+
+                div.classList.add('skin-btn');
+                img.classList.add('splash-icon');
+                
+
+            }
+        }
+        for (let i = 0; i < skinIcons.length; i++) {
+            skinIcons[i].src = champData['skins'][i].imageUrl
+            if (champData['skins'][i].name !== 'default') skinIcons[i].parentElement.lastElementChild.innerText = champData['skins'][i].name
+            else skinIcons[i].parentElement.lastElementChild.innerText = champData['champion_name'].toUpperCase()
+        }
+
+        
+    })
+
+    console.log(index)
+    return index.path[0].id
+
+    
 }
 
-// function sendToChampionPage (event) {
-//     championId = event.path[3].id
-    
-// }
+
 
 
 window.addEventListener('load', loadGridDivs)
 
-
+export { gatherData }
