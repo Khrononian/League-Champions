@@ -5,14 +5,9 @@
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400&display=swap');
-
-body {
-    /* color: white; */
-}
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600;700&display=swap');
 
 header {
-
     position: relative;
     background: rgb(0, 9, 19);
 }
@@ -37,13 +32,23 @@ header {
 }
 
 .champ-btn {
-    padding: .5em 1.4em;
+    padding: .65em 1.4em;
     background: black;
     opacity: .8;
     color: white;
     text-transform: uppercase;
     border: 1px solid lightseagreen;
     cursor: pointer;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 600;
+    font-size: .7rem;
+    letter-spacing: .5px;
+}
+
+.fa-shield-blank {
+    margin-left: .5rem;
+    color: white;
+    font-size: .8rem;
 }
 
 
@@ -132,7 +137,6 @@ header {
 
 .champion-role img {
     width: 28px;
-
 }
 
 .champion-difficulty > div > i {
@@ -227,6 +231,7 @@ header {
     align-items: center;
     flex-wrap: wrap;
     padding: 1em 1.5em 2em 1.5em;
+    max-width: 100%;
 }
 
 .ability-list {
@@ -235,8 +240,12 @@ header {
     flex-direction: column;
 }
 
+.ability-list div {
+    position: relative;
+}
+
 .ability-list h2 {
-    margin-bottom: 2rem;
+    margin-bottom: 4rem;
     font-family: 'Noto Sans', sans-serif;
     font-style: italic;
     font-weight: 700;
@@ -255,6 +264,15 @@ header {
     background: transparent;
     cursor: pointer;
     border-color: transparent;
+}
+
+.ability-btn {
+    transition: transform ease .4s;
+    background: red;
+}
+
+.ability-btn:hover {
+    transform: translate(0, -10px);
 }
 
 .ability-info {
@@ -279,29 +297,29 @@ header {
     margin-top: .5rem;
 }
 
-
-
-.champion-skins {
-    
+.ability-showcase video {
+    max-width: 100%;
 }
+
+
 
 .skin-contain {
-    width: 80%;
+    width: 82%;
+    max-width: 100%;
     margin: 3rem auto;
     position: relative;
-    height: 649px;
+    /* height: 665px; */
+    
 }
-
-
 
 .side-bar, .side-overlay {
     position: absolute;
     left: 0;
     bottom: 0;
-    width: 380px;
+    width: 400px;
     height: 100%;
     background: transparent;
-    padding: 1.5em;
+    padding: 2.5em;
     overflow: hidden;
     backdrop-filter: blur(8px);
 
@@ -310,19 +328,26 @@ header {
 .side-overlay {
     background:rgb(0, 9, 19);
     opacity: .7;
-    height: 100%;
+    /* height: 100%; */
 }
 
 .side-bar h4 {
     color: white;
-    padding-bottom: 1em;
+    padding-bottom: .5em;
     border-bottom: 1px solid rgb(126, 126, 126);
     font-family: 'Noto Sans', sans-serif;
     font-weight: 700;
+    font-style: italic;
+    font-size: 2.8rem;
 }
 
-.champion-splash, .splash-icon {
+.champion-splash {
     width: 100%;
+    height: 100%;
+}
+
+.splash-icon {
+    width: 130px;
 }
 
 .skin-btns {
@@ -331,28 +356,36 @@ header {
     flex-direction: column;
     cursor: pointer;
     margin-top: 3rem;
-    
 }
 
 .skin-btns div {
     display: flex;
     align-items: center;
-    margin-bottom: .8rem;
+    margin-bottom: 2rem;
     /* width: 150px; */
     width: 100%;
+
+}
+
+.skin-btn {
     cursor: pointer;
 }
 
-.skin-btns div img {
-    max-width: 150px
+.skin-btn img, .skin-btn h5 {
+    transition: all ease .4s;
+}
+
+.skin-btn:hover img {
+    transform: scale(1.09);
+}
+
+.skin-btn:hover h5 {
+    color: white;
 }
 
 .skin-btns div h5 {
-    color: white;
-    margin-left: 1.5rem;
+    color:rgb(126, 126, 126);
+    margin-left: 1rem;
     width: 100%;
-}
-
-.splash-icons {
-    height: 150px;
+    text-transform: uppercase;
 }

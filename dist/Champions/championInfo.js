@@ -8,14 +8,12 @@
 
 console.log('THIS PAGE WORKS')
 
-document.querySelectorAll('.splash-icon').forEach(image => image.addEventListener('click', event => {
-    console.log('CLICKED', event.target)
-    event.target.scrollIntoView({behavior: 'smooth', block: 'center'})
+document.querySelectorAll('.skin-btn').forEach(image => image.addEventListener('click', event => {
+    console.log('CLICKED', event.target)   
+    event.target.scrollIntoView({behavior: 'smooth', block: 'center', inline: 'center'})
     
-    const scrollToElement = document.querySelector('.side-bar');
+    document.querySelector('.champion-splash').src = event.target.parentElement.querySelector('img').src 
 
-    // scrollToElement.scrollBy(0, event.target.offsetTop)
-
-    document.querySelector('.champion-splash').src = event.target.src 
 }))
 
+document.querySelector('.skin-contain').style.height = document.querySelector('.champion-splash').offsetHeight + 'px'
