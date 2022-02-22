@@ -17,3 +17,7 @@ document.querySelectorAll('.skin-btn').forEach(image => image.addEventListener('
 }))
 
 document.querySelector('.skin-contain').style.height = document.querySelector('.champion-splash').offsetHeight + 'px'
+window.addEventListener('resize', () => {
+    console.log('Resize')
+    document.querySelector('.skin-contain').style.height = document.querySelector('.champion-splash').offsetHeight + 'px'
+})
