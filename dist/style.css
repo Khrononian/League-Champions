@@ -8,6 +8,10 @@
     box-sizing: border-box;
 }
 
+html, body {
+    min-height: 100%;
+}
+
 header {
     text-align: center;
     margin-bottom: 5rem;
@@ -16,8 +20,9 @@ header {
 
 header h1 {
     font-size: 6rem;
-    font-family: 'Noto Sans', sans-serif;
-    font-weight: 700;
+    font-family: 'Merriweather', serif;
+    font-weight: 900;
+    letter-spacing: .05em;
     font-style: italic;
 }
 
@@ -250,13 +255,12 @@ a:hover .imgs {
     width: 80%;
     margin: 0 auto;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .champion-name {
-    position: absolute;
-    top: -19%;
-    right: 50%;
-    transform: translate(50%, -62%);
     text-align: center;
     display: flex;
     flex-direction: row;
@@ -354,7 +358,6 @@ a:hover .imgs {
 
 .champion-challenge, .champion-lore {
     display: flex;
-    
     width: 50%;
 }
 
@@ -417,7 +420,6 @@ a:hover .imgs {
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
-    padding: 1em 1.5em 2em 1.5em;
     max-width: 100%;
 }
 
@@ -425,6 +427,7 @@ a:hover .imgs {
     display: flex;
     justify-content: space-evenly;
     flex-direction: column;
+    padding: 1em;
 }
 
 .ability-list div {
@@ -455,11 +458,15 @@ a:hover .imgs {
 
 .ability-btn {
     transition: transform ease .4s;
-    background: red;
 }
 
 .ability-btn:hover {
     transform: translate(0, -10px);
+}
+
+.ability-up-animation {
+    transform: translate(0, -20px);
+    transition: all ease .4s;
 }
 
 .ability-info {
@@ -490,34 +497,18 @@ a:hover .imgs {
 
 
 
+.champion-skins {
+    min-height: 100vh;
+}
+
 .skin-contain {
     width: 82%;
     max-width: 100%;
     margin: 3rem auto;
     position: relative;
-    /* height: 665px; */
-    
 }
 
-.side-bar, .side-overlay {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 400px;
-    height: 100%;
-    background: transparent;
-    padding: 2.5em;
-    overflow: hidden;
-    backdrop-filter: blur(8px);
-
-}
-
-.side-overlay {
-    background:rgb(0, 9, 19);
-    opacity: .7;
-}
-
-.side-bar h4 {
+.skin-contain h4 {
     color: white;
     padding-bottom: .5em;
     border-bottom: 1px solid rgb(126, 126, 126);
@@ -528,9 +519,21 @@ a:hover .imgs {
     font-family: 'Merriweather', serif;
 }
 
+.side-bar {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 400px;
+    height: 100%;
+    background: transparent;
+    padding: 2.5em;
+    overflow: hidden;
+    backdrop-filter: blur(7px);
+
+}
+
 .champion-splash {
     width: 100%;
-    height: 100%;
 }
 
 .splash-icon {
@@ -575,4 +578,219 @@ a:hover .imgs {
     margin-left: 1rem;
     width: 100%;
     text-transform: uppercase;
+}
+
+@media only screen and (min-width: 280px) and (max-width: 1024px) {
+    .champion-header {
+        padding-top: 0;
+    }
+
+    .champion-box {
+        width: 95%;
+    }
+    
+    .champion-name h1 {
+        font-size: 3rem;
+    }
+
+    .champion-name h3 {
+        font-size: 1.2rem;
+    }
+    
+    .champion-info {
+        display: flex;
+        flex-direction: column;
+        padding: .3em;
+    }
+
+    .champion-info div {
+        padding: .5em;
+    }
+
+    .champion-challenge, .champion-lore {
+        width: 100%;
+        border: 0;
+    }
+
+    .role-icon {
+        margin-bottom: 1rem;
+    }
+
+    .box-footer {
+        width: 100%;
+        justify-content: space-evenly;
+    }
+
+    .box-footer div {
+        width: 100%;
+    }
+
+
+
+    .champion-abilities {
+        padding: 1em;
+        background-size: 80%;
+    }
+
+    .ability-contain {
+        width: 90%;
+        padding: 0;
+        margin: 0 auto;
+    }
+
+    .ability-list {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .ability-list h2 {
+        font-size: 2.8rem;
+        text-align: center;
+    }
+
+    .ability-icon {
+        width: 51px
+    }
+
+    .ability-list > :nth-child(2) {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .ability-info {
+        padding: 0;
+        width: 100%;
+        margin: 0 auto 1rem auto;
+        max-width: 400px;
+    }
+
+    .ability-showcase video {
+        height: 300px;
+        margin-top: 1.5rem;
+    }
+
+    
+
+    .champion-skins { 
+        background: rgb(0, 9, 19);
+        min-height: 50vh;
+    }
+
+    .skin-contain {
+        width: 100%;
+        margin: 0;
+    }
+
+    .skin-contain h4 {
+        border-bottom: 0;
+        width: 100%;
+        font-size: 2.1rem;
+        text-align: center;
+    }
+
+    .champion-splash {
+        width: 100%;
+        object-fit: contain;
+    }
+
+    .side-overlay {
+        display: none;
+    }  
+
+    .side-bar {
+        padding: 0;
+        backdrop-filter: unset;
+        width: 100%;
+        height: 100%;
+        background:rgb(0, 9, 19);
+        position: relative;
+        bottom: 20px;
+    }
+
+    .side-bar h4 {
+        display: none;
+    }
+
+    .skin-btns {
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: row;
+        align-items: baseline;
+        width: 100%;
+        height: 135px;
+        margin-top: 1rem;
+    }
+
+    .skin-btn {
+        flex-direction: column;
+        text-align: center;
+        margin-right: 1.3rem;
+        
+    }
+
+    .splash-icon {
+        margin-bottom: .5rem;
+    }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 1025px) {
+    .champion-box {
+        width: 80%;
+    }
+
+    .champion-lore p {
+        padding: 2em;
+    }
+
+    .champion-name h3 {
+        font-size: 1.8rem;
+    }
+
+    .champion-name h1 {
+        font-size: 6rem;
+    }
+
+    .box-footer div {
+        width: 60%;
+    }
+
+
+
+    .champion-abilities {
+        background-size: 60%;
+    }
+
+    .ability-list > :nth-child(2) {
+        width: 70%;
+    }
+
+    .ability-icon {
+        width: 60px;
+    }
+
+    .ability-info {
+        max-width: 600px;
+    }
+
+
+
+    .side-bar {
+        min-height: 50vh;
+    }
+
+    .skin-contain h4 {
+        padding-top: 4em;
+        visibility: hidden;
+    }
+
+    
+}
+
+
+.new {
+    display: none
 }
