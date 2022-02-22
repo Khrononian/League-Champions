@@ -109,7 +109,7 @@ const loadGridDivs = () => {
 
 }
 const gatherData = index => {
-    const getChampionData = fetch(`https://league-of-legends-champions.p.rapidapi.com/champions/en-us/${index.path[0].id}`, {
+    fetch(`https://league-of-legends-champions.p.rapidapi.com/champions/en-us/${index.path[0].id}`, {
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "league-of-legends-champions.p.rapidapi.com",
@@ -120,18 +120,22 @@ const gatherData = index => {
         console.log(data)
         const champData = data.champion[0]
         const links = document.querySelectorAll('.link');
+        const linkArray = []
         const skinIcons = document.querySelectorAll('.splash-icon');
-        const backgrounds = document.querySelector('.champion-abilities')
-
+        const backgrounds = document.querySelector('.champion-abilities');
+        
+        champData['links'].sort((a, b) => a.title.length - b.title.length)
+        linkArray.push(champData['links'])
+        for (let i = 0; i < links.length; i++) {
+            links[i].href = linkArray[0][i].href
+        }
         document.querySelector('.blur-splash').src = champData['champion_splash']
         document.querySelector('.champ-splash').src = champData['champion_splash']
         document.querySelector('.champion-container').firstElementChild.innerText = champData['champion_title'].toUpperCase()
         document.querySelector('.champion-container').lastElementChild.innerText = champData['champion_name'].toUpperCase()
         document.querySelector('.champion-role').lastElementChild.innerText = champData['recommended_roles'][0]
         document.querySelector('.champion-lore').firstElementChild.innerText = champData['lore']
-        for (let i = 0; i < links.length; i++) {
-            links[i].href = champData['links'][i].href
-        }
+        
         document.getElementById('champion_passive').src = champData['champion_passive'].champion_passive_icon
         document.querySelector('.ability-info').querySelector('h4').innerText = champData['champion_passive'].champion_passive_name
         document.querySelector('.description').innerText = champData['champion_passive'].champion_passive_description
@@ -141,68 +145,68 @@ const gatherData = index => {
         document.getElementById('champion_w').src = champData['champion_w'].champion_w_icon
         document.getElementById('champion_e').src = champData['champion_e'].champion_e_icon
         document.getElementById('champion_r').src = champData['champion_r'].champion_r_icon
+        document.querySelector('video').load()
+        document.querySelector('video').play()
         
         switch (champData['recommended_roles'][0]) {
             case 'Mage':
                 console.log('MAGE');
-                backgrounds.backgroundImage = `url('../dist/FontIcons/magebackground.svg')`
+                document.querySelector('.role-icon').src = `FontIcons/mage.svg`
+                backgrounds.style.backgroundImage = `url('../dist/FontIcons/magebackground.svg')`
             break;
             case 'Assassin':
                 console.log('ASSASSIN');
-                backgrounds.backgroundImage = `url('../dist/FontIcons/assassinbackground.svg')`
+                document.querySelector('.role-icon').src = `FontIcons/assassin.svg`
+                backgrounds.style.backgroundImage = `url('../dist/FontIcons/assassinbackground.svg')`
             break;
             case 'Fighter':
                 console.log('FIGHTER');
-                backgrounds.backgroundImage = `url('../dist/FontIcons/fighterbackground.svg')`
+                document.querySelector('.role-icon').src = `FontIcons/fighter.svg`
+                backgrounds.style.backgroundImage = `url('../dist/FontIcons/fighterbackground.svg')`
             break;
             case 'Tank':
                 console.log('TANK');
-                backgrounds.backgroundImage = `url('../dist/FontIcons/tankbackground.svg')`
+                document.querySelector('.role-icon').src = `FontIcons/tank.svg`
+                backgrounds.style.backgroundImage = `url('../dist/FontIcons/tankbackground.svg')`
             break;
             case 'Marksman':
                 console.log('MARKSMAN');
-                backgrounds.backgroundImage = `url('../dist/FontIcons/marksmanbackground.svg')`
+                document.querySelector('.role-icon').src = `FontIcons/marksman.svg`
+                backgrounds.style.backgroundImage = `url('../dist/FontIcons/marksmanbackground.svg')`
             break;
             case 'Support':
                 console.log('SUPPORT');
-                backgrounds.backgroundImage = `url('../dist/FontIcons/supportbackground.svg')`
+                document.querySelector('.role-icon').src = `FontIcons/support.svg`
+                backgrounds.style.backgroundImage = `url('../dist/FontIcons/supportbackground.svg')`
             break;
         }
 
-        document.querySelector('video').load()
-        document.querySelector('video').play()
-
-
         document.querySelector('.champion-splash').src = champData['champion_splash']
-        if (champData['skins'].length > skinIcons.length) {
-            console.log('GREATER');
-            let difference = champData['skins'].length - skinIcons.length;
+        
+        const btns = document.querySelector('.skin-btns')
 
-            for (let i = 0; i < difference; i++) {
-                const div = document.createElement('div');
-                const img = document.createElement('img');
-                const h5 = document.createElement('h5');
+        for (let i = 0; i < skinIcons.length; i++) {
+            console.log('CHECK STRING', skinIcons[i].parentElement.lastElementChild.innerText.includes(`${champData['champion_name']}`), champData['champion_name'].includes(`${champData['champion_name']}`))
+            if (i < champData['skins'].length) {
+                if (champData['skins'][i]) skinIcons[i].src = champData['skins'][i].imageUrl
+                if (champData['skins'][i].name && champData['skins'][i].name == 'default') skinIcons[0].parentElement.lastElementChild.innerText = champData['champion_name'].toUpperCase()
+                else if (champData['skins'][i].name) skinIcons[i].parentElement.lastElementChild.innerText = champData['skins'][i].name
+            }  else if (champData['champion_name'].includes(`${champData['champion_name']}`) == true) {
+                console.log('INVISIBLE')
+                skinIcons[i].parentElement.style.display = 'none'
+            } 
+            // if (champData['skins'].length > skinIcons.length && btns.lastElementChild.style.display == 'none' && btns.lastElementChild.previousElementSibling.style.display == 'none') {
+            //     console.log('VISIBLE')
 
-                document.querySelector('.skin-btns').appendChild(div);
-                div.appendChild(img);
-                div.appendChild(h5);
-
-                div.classList.add('skin-btn');
-                img.classList.add('splash-icon');
-                
-
+            //     btns.lastElementChild.style.display = ''
+            //     btns.lastElementChild.previousElementSibling.style.display = ''
+            // }
+            if (champData['skins'].length > skinIcons.length && skinIcons[i].parentElement.style.display == 'none') {
+                skinIcons[i].parentElement.style.display = ''
             }
         }
-        for (let i = 0; i < skinIcons.length; i++) {
-            skinIcons[i].src = champData['skins'][i].imageUrl
-            if (champData['skins'][i].name !== 'default') skinIcons[i].parentElement.lastElementChild.innerText = champData['skins'][i].name
-            else skinIcons[i].parentElement.lastElementChild.innerText = champData['champion_name'].toUpperCase()
-        }
-
-        
     })
 
-    console.log(index)
     return index.path[0].id
 
     
