@@ -77,6 +77,36 @@ nav {
     padding: .6em 2em .6em 3.5em;
 }
 
+.side-btns button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.challenge-btn button i,
+.type i {
+    margin-left: .5rem;
+}
+
+.search-btn button i {
+    margin-right: .5rem;
+}
+
+.challenge-btn button i,
+.search-btn button i,
+.type i {
+    transition: transform ease .4s;
+}
+
+.challenge-btn button:hover > i, 
+.type:hover > i {
+    transform: translateX(7px);
+}
+
+.search-btn button:hover > i {
+    transform: translateX(-7px);
+}
+
 .btn-contain {
     height: 100%;
     position: relative;
@@ -109,6 +139,10 @@ nav {
     color: #000;
 }
 
+.champ-types {
+    display: none;
+}
+
 .btn-contain:hover::after {
     width: 79%;
     opacity: 1;
@@ -122,31 +156,36 @@ nav {
     color: #000;
 }
 
-.middle-btns button, .side-btns button {
+.middle-btns button, .side-btns button, .type {
     cursor: pointer;
     background: transparent;
     border: 1px solid transparent;
     text-transform: uppercase;
-    letter-spacing: 1.1px;
+    letter-spacing: .8px;
     font-size: .6rem;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 400;
 }
 
 .contain {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
     width: 92%;
     background: red;
     margin: 1.5rem auto;
     justify-content: space-between;
-    gap: 30px;
+    gap: 1rem;
 }
 
 a {
     cursor: pointer;
+    width: 100%;
+    max-width: 250px;
 }
 
 .card {
-    width: 225px;
+    width: 100%;
+    max-width: 250px;
     position: relative;
     pointer-events: none;
 }
@@ -157,7 +196,7 @@ a {
 }
 
 .imgs {
-    width: 225px;
+    width: 100%;
     height: 320px;
     object-fit: cover;
     transition: .7s ease;
@@ -580,6 +619,76 @@ a:hover .imgs {
     text-transform: uppercase;
 }
 
+
+
+@media screen and (min-width: 320px) and (max-width: 1024px) {
+    header > h1 {
+        font-size: 3rem;
+    }
+
+    .span {
+        width: 100%;
+        max-width: 450px;
+    }
+
+    nav {
+        width: 100%;
+        justify-content: space-between;
+        padding: .35em;
+    }
+    
+    .middle-btns,
+    .search-btn button p {
+        display: none;
+    }
+
+    .search-btn button {
+        padding: .3em .8em .3em .3em;
+    }
+
+    .challenge-btn button {
+        padding: .3em .3em .3em 1.1em;
+    }
+
+    .side-btns {
+        padding: .3em .3em
+    }
+
+    .champ-types {
+        display: unset;
+    }
+
+    .type {
+        display: flex;
+        align-items: center;
+    }
+
+    .contain {
+        width: 96%;
+        grid-template-columns: repeat(auto-fit, minmax(147px, 17%));
+        gap: .5rem;
+    }
+
+    a {
+        height: 168px;
+    }
+
+    .card, .card > * {
+        height: 100%;
+    }
+
+    .imgs {
+        object-position: 50% 50%;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    .img-overlay p {
+        font-size: clamp(100%, 2vw, 2rem)
+    }
+}
+
 @media only screen and (min-width: 280px) and (max-width: 1024px) {
     .champion-header {
         padding-top: 0;
@@ -737,7 +846,7 @@ a:hover .imgs {
     }
 }
 
-@media only screen and (min-width: 600px) and (max-width: 1025px) {
+@media only screen and (min-width: 600px) and (max-width: 1024px) {
     .champion-box {
         width: 80%;
     }
@@ -786,10 +895,7 @@ a:hover .imgs {
         padding-top: 4em;
         visibility: hidden;
     }
-
-    
 }
-
 
 .new {
     display: none
