@@ -171,7 +171,6 @@ nav {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
     width: 92%;
-    background: red;
     margin: 1.5rem auto;
     justify-content: space-between;
     gap: 1rem;
@@ -417,7 +416,7 @@ a:hover .imgs {
 .box-footer div p {
     color:rgb(126, 126, 126);
     cursor: default;
-    
+    width: 800px;
 }
 
 .box-footer div {
@@ -600,6 +599,10 @@ a:hover .imgs {
     cursor: pointer;
 }
 
+.skin-btn h5 {
+    pointer-events: none;
+}
+
 .skin-btn img, .skin-btn h5 {
     transition: all ease .4s;
 }
@@ -667,10 +670,6 @@ a:hover .imgs {
         width: 96%;
         grid-template-columns: repeat(auto-fit, minmax(147px, 17%));
         gap: .5rem;
-    }
-
-    a {
-        height: 168px;
     }
 
     .card, .card > * {

@@ -35,7 +35,7 @@ const loadGridDivs = () => {
     const requests = responses.map(response => response.then(getData => getData.json()))
     const getChampionImages = Promise.all(requests)
     
-    for (let i = 0; i < 159; i++) {
+    for (let i = 0; i < 161; i++) {
         const cardDiv = document.createElement('div');
         const cardImg = document.createElement('div');
         const divOverlay = document.createElement('div');
@@ -51,6 +51,7 @@ const loadGridDivs = () => {
         divOverlay.appendChild(p);
 
         a.id = ''
+        p.classList.add('p')
         cardDiv.classList.add('card');
         cardImg.classList.add('card-img');
         divOverlay.classList.add('img-overlay');
@@ -67,7 +68,7 @@ const loadGridDivs = () => {
 
     getChampionNames.then(response => response.json())
     .then(data => {
-        const getPTags = document.querySelectorAll('p');
+        const getPTags = document.querySelectorAll('.p');
         const aTags = document.querySelectorAll('a')
 
         for (let i = 0; i < data.champ_names.length; i++) {
@@ -82,18 +83,18 @@ const loadGridDivs = () => {
     getChampionImages
     .then(data => {
         console.log(data, data[0])
-        const getPTags = document.querySelectorAll('p');
+        const getPTags = document.querySelectorAll('.p');
         let index = 0;
 
         const runFirstPromise = (getIndex) => {
             for (let j = 0; j < getPTags.length; j++) {
                 for (let i = 0; i < data[getIndex].champions.length; i++) {
-                    // getImgTags[i].src = data.champions[champion].node.champion.profile_image.url
+                    // getImgTags[i].src = data[index].champions[index].node.champion.profile_image.url
                     if (data[getIndex].champions[i].node.champion.profile_image === null) {
                         continue
-                    } else if (getPTags[j].innerText == data[getIndex].champions[i].node.champion_name) {
+                    } else if (getPTags[j].innerText == data[getIndex].champions[i].node.champion_name.toUpperCase()) {
                         console.log('Check all', getPTags[j], data[getIndex].champions[i].node.champion_name)
-                        getPTags[j].parentElement.parentElement.querySelector('img').src = data[getIndex].champions[i].node.champion.profile_image.url
+                        getPTags[j].parentElement.parentElement.querySelector('.imgs').src = data[getIndex].champions[i].node.champion.profile_image.url
                     }
                 }
             }
@@ -192,12 +193,12 @@ const gatherData = index => {
                 console.log('INVISIBLE')
                 skinIcons[i].parentElement.style.display = 'none'
             } 
-            // if (champData['skins'].length > skinIcons.length && btns.lastElementChild.style.display == 'none' && btns.lastElementChild.previousElementSibling.style.display == 'none') {
-            //     console.log('VISIBLE')
+            if (champData['skins'].length > skinIcons.length && btns.lastElementChild.style.display == 'none' && btns.lastElementChild.previousElementSibling.style.display == 'none') {
+                console.log('VISIBLE')
 
-            //     btns.lastElementChild.style.display = ''
-            //     btns.lastElementChild.previousElementSibling.style.display = ''
-            // }
+                btns.lastElementChild.style.display = ''
+                btns.lastElementChild.previousElementSibling.style.display = ''
+            }
             if (champData['skins'].length > skinIcons.length && skinIcons[i].parentElement.style.display == 'none') {
                 skinIcons[i].parentElement.style.display = ''
             }
@@ -205,8 +206,6 @@ const gatherData = index => {
     })
 
     return index.path[0].id
-
-    
 }
 
 window.addEventListener('load', loadGridDivs)

@@ -71,7 +71,9 @@ const changeAbilitySection = (index, event) => {
 
 skinBtns.forEach(btn => btn.addEventListener('click', event => {
     event.target.scrollIntoView({behavior: 'smooth', block: 'center', inline: 'center'})
-    document.querySelector('.champion-splash').src = event.target.parentElement.querySelector('img').src 
+    console.log(event.target, event.target.className)
+    if (event.target.className == 'skin-btn') document.querySelector('.champion-splash').src = event.target.firstElementChild.src
+    else document.querySelector('.champion-splash').src = event.target.parentElement.querySelector('img').src 
 }))
 
 abilityBtns.forEach(btn => btn.addEventListener('click', event => {
