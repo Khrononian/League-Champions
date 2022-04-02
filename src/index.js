@@ -33,32 +33,7 @@ const loadGridDivs = () => {
         }),
     ]
     const requests = responses.map(response => response.then(getData => getData.json()))
-    const getChampionImages = Promise.all(requests)
-    
-    for (let i = 0; i < 161; i++) {
-        const cardDiv = document.createElement('div');
-        const cardImg = document.createElement('div');
-        const divOverlay = document.createElement('div');
-        const img = document.createElement('img');
-        const p = document.createElement('p');
-        const a = document.createElement('a');
-
-        selectParent.appendChild(a)
-        a.appendChild(cardDiv);
-        cardDiv.appendChild(cardImg);
-        cardImg.appendChild(img);
-        cardImg.appendChild(divOverlay);
-        divOverlay.appendChild(p);
-
-        a.id = ''
-        p.classList.add('p')
-        cardDiv.classList.add('card');
-        cardImg.classList.add('card-img');
-        divOverlay.classList.add('img-overlay');
-        img.classList.add('imgs');
-
-        a.addEventListener('click', sendToChampionPage)
-    }
+    const getChampionImages = Promise.all(requests);
     
     document.querySelector('.skin-contain').style.height = document.querySelector('.champion-splash').offsetHeight + 'px'
     document.querySelector('.header').style.display = 'none';
@@ -67,7 +42,32 @@ const loadGridDivs = () => {
     document.querySelector('.champion-skins').style.display = 'none'
 
     getChampionNames.then(response => response.json())
-    .then(data => {
+    .then(data => {        
+        for (let i = 0; i < data.champ_names.length; i++) {
+            const cardDiv = document.createElement('div');
+            const cardImg = document.createElement('div');
+            const divOverlay = document.createElement('div');
+            const img = document.createElement('img');
+            const p = document.createElement('p');
+            const a = document.createElement('a');
+
+            selectParent.appendChild(a)
+            a.appendChild(cardDiv);
+            cardDiv.appendChild(cardImg);
+            cardImg.appendChild(img);
+            cardImg.appendChild(divOverlay);
+            divOverlay.appendChild(p);
+
+            a.id = ''
+            p.classList.add('p')
+            cardDiv.classList.add('card');
+            cardImg.classList.add('card-img');
+            divOverlay.classList.add('img-overlay');
+            img.classList.add('imgs');
+
+            a.addEventListener('click', sendToChampionPage)
+        }
+
         const getPTags = document.querySelectorAll('.p');
         const aTags = document.querySelectorAll('a')
 
@@ -85,17 +85,19 @@ const loadGridDivs = () => {
         console.log(data, data[0])
         const getPTags = document.querySelectorAll('.p');
         let index = 0;
-
+        // MAKE AN ARRAY FOR IMAGES THAT DONT SHOW UP
         const runFirstPromise = (getIndex) => {
             for (let j = 0; j < getPTags.length; j++) {
                 for (let i = 0; i < data[getIndex].champions.length; i++) {
                     // getImgTags[i].src = data[index].champions[index].node.champion.profile_image.url
-                    if (data[getIndex].champions[i].node.champion.profile_image === null) {
-                        continue
+                    if (data[getIndex].champions[i].node.champion.profile_image === null && getPTags[j].innerText == data[getIndex].champions[i].node.champion_name.toUpperCase()) {
+                        
+                        // continue
+                        getPTags[j].parentElement.parentElement.querySelector('.imgs').src = data[getIndex].champions[i].node.champion_splash
                     } else if (getPTags[j].innerText == data[getIndex].champions[i].node.champion_name.toUpperCase()) {
                         console.log('Check all', getPTags[j], data[getIndex].champions[i].node.champion_name)
                         getPTags[j].parentElement.parentElement.querySelector('.imgs').src = data[getIndex].champions[i].node.champion.profile_image.url
-                    }
+                    } 
                 }
             }
         }
