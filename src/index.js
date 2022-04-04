@@ -42,7 +42,7 @@ const loadGridDivs = () => {
     document.querySelector('.champion-skins').style.display = 'none'
 
     getChampionNames.then(response => response.json())
-    .then(data => {        
+    .then(data => {
         for (let i = 0; i < data.champ_names.length; i++) {
             const cardDiv = document.createElement('div');
             const cardImg = document.createElement('div');
@@ -78,36 +78,31 @@ const loadGridDivs = () => {
             }
             else getPTags[i].parentElement.parentElement.parentElement.parentElement.remove()
         }
-    })
 
-    getChampionImages
-    .then(data => {
-        console.log(data, data[0])
-        const getPTags = document.querySelectorAll('.p');
-        let index = 0;
-        // MAKE AN ARRAY FOR IMAGES THAT DONT SHOW UP
-        const runFirstPromise = (getIndex) => {
-            for (let j = 0; j < getPTags.length; j++) {
-                for (let i = 0; i < data[getIndex].champions.length; i++) {
-                    // getImgTags[i].src = data[index].champions[index].node.champion.profile_image.url
-                    if (data[getIndex].champions[i].node.champion.profile_image === null && getPTags[j].innerText == data[getIndex].champions[i].node.champion_name.toUpperCase()) {
-                        
-                        // continue
-                        getPTags[j].parentElement.parentElement.querySelector('.imgs').src = data[getIndex].champions[i].node.champion_splash
-                    } else if (getPTags[j].innerText == data[getIndex].champions[i].node.champion_name.toUpperCase()) {
-                        console.log('Check all', getPTags[j], data[getIndex].champions[i].node.champion_name)
-                        getPTags[j].parentElement.parentElement.querySelector('.imgs').src = data[getIndex].champions[i].node.champion.profile_image.url
-                    } 
+        getChampionImages
+        .then(data => {
+            const getPTags = document.querySelectorAll('.p');
+            let index = 0;
+
+            const runFirstPromise = (getIndex) => {
+                for (let j = 0; j < getPTags.length; j++) {
+                    for (let i = 0; i < data[getIndex].champions.length; i++) {
+                        if (data[getIndex].champions[i].node.champion.profile_image === null && getPTags[j].innerText == data[getIndex].champions[i].node.champion_name.toUpperCase()) {
+                            getPTags[j].parentElement.parentElement.querySelector('.imgs').src = data[getIndex].champions[i].node.champion_splash
+                        } else if (getPTags[j].innerText == data[getIndex].champions[i].node.champion_name.toUpperCase()) {
+                            getPTags[j].parentElement.parentElement.querySelector('.imgs').src = data[getIndex].champions[i].node.champion.profile_image.url
+                        }
+                    }
                 }
             }
-        }
-        while (index <= 2) {
-            runFirstPromise(index)
-            index++
-        }
-    }).catch(error => console.log(error))
-
+            while (index <= 2) {
+                runFirstPromise(index)
+                index++
+            }
+        }).catch(error => console.log(error))
+    })
 }
+
 const gatherData = index => {
     fetch(`https://league-of-legends-champions.p.rapidapi.com/champions/en-us/${index.path[0].id}`, {
         "method": "GET",
@@ -117,7 +112,6 @@ const gatherData = index => {
         }
     }).then(response => response.json())
     .then(data => {
-        console.log(data)
         const champData = data.champion[0]
         const links = document.querySelectorAll('.link');
         const linkArray = []
@@ -150,32 +144,26 @@ const gatherData = index => {
         
         switch (champData['recommended_roles'][0]) {
             case 'Mage':
-                console.log('MAGE');
                 document.querySelector('.role-icon').src = `FontIcons/mage.svg`
                 backgrounds.style.backgroundImage = `url('../dist/FontIcons/magebackground.svg')`
             break;
             case 'Assassin':
-                console.log('ASSASSIN');
                 document.querySelector('.role-icon').src = `FontIcons/assassin.svg`
                 backgrounds.style.backgroundImage = `url('../dist/FontIcons/assassinbackground.svg')`
             break;
             case 'Fighter':
-                console.log('FIGHTER');
                 document.querySelector('.role-icon').src = `FontIcons/fighter.svg`
                 backgrounds.style.backgroundImage = `url('../dist/FontIcons/fighterbackground.svg')`
             break;
             case 'Tank':
-                console.log('TANK');
                 document.querySelector('.role-icon').src = `FontIcons/tank.svg`
                 backgrounds.style.backgroundImage = `url('../dist/FontIcons/tankbackground.svg')`
             break;
             case 'Marksman':
-                console.log('MARKSMAN');
                 document.querySelector('.role-icon').src = `FontIcons/marksman.svg`
                 backgrounds.style.backgroundImage = `url('../dist/FontIcons/marksmanbackground.svg')`
             break;
             case 'Support':
-                console.log('SUPPORT');
                 document.querySelector('.role-icon').src = `FontIcons/support.svg`
                 backgrounds.style.backgroundImage = `url('../dist/FontIcons/supportbackground.svg')`
             break;
@@ -186,18 +174,14 @@ const gatherData = index => {
         const btns = document.querySelector('.skin-btns')
 
         for (let i = 0; i < skinIcons.length; i++) {
-            console.log('CHECK STRING', skinIcons[i].parentElement.lastElementChild.innerText.includes(`${champData['champion_name']}`), champData['champion_name'].includes(`${champData['champion_name']}`))
             if (i < champData['skins'].length) {
                 if (champData['skins'][i]) skinIcons[i].src = champData['skins'][i].imageUrl
                 if (champData['skins'][i].name && champData['skins'][i].name == 'default') skinIcons[0].parentElement.lastElementChild.innerText = champData['champion_name'].toUpperCase()
                 else if (champData['skins'][i].name) skinIcons[i].parentElement.lastElementChild.innerText = champData['skins'][i].name
             }  else if (champData['champion_name'].includes(`${champData['champion_name']}`) == true) {
-                console.log('INVISIBLE')
                 skinIcons[i].parentElement.style.display = 'none'
             } 
             if (champData['skins'].length > skinIcons.length && btns.lastElementChild.style.display == 'none' && btns.lastElementChild.previousElementSibling.style.display == 'none') {
-                console.log('VISIBLE')
-
                 btns.lastElementChild.style.display = ''
                 btns.lastElementChild.previousElementSibling.style.display = ''
             }
@@ -205,8 +189,7 @@ const gatherData = index => {
                 skinIcons[i].parentElement.style.display = ''
             }
         }
-    })
-
+    }).catch(error => console.log(error))
     return index.path[0].id
 }
 
