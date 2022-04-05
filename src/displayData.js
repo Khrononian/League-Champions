@@ -46,7 +46,7 @@ const sendToChampionList = event => {
 }
 
 const changeAbilitySection = (index, event) => {
-    fetch(`https://league-of-legends-champions.p.rapidapi.com/champions/en-us/${index}`, {
+    fetch(`https://league-of-legends-champions.p.rapidapi.com/champions/en-us/${index.replace(/[ .']/g, '-').replace(/-{2,}/, '-')}`, {
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "league-of-legends-champions.p.rapidapi.com",
@@ -91,7 +91,7 @@ abilityBtns.forEach(btn => btn.addEventListener('click', event => {
         if (abilityBtns[i].parentElement.classList.contains('ability-up-animation')) {
             abilityBtns[i].parentElement.classList.toggle('ability-up-animation')
             abilityBtns[i].parentElement.classList.toggle('ability-btn')
-        } 
+        }
     }
     
     event.target.parentElement.classList.toggle('ability-btn')

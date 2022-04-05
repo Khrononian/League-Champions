@@ -100,11 +100,11 @@ const loadGridDivs = () => {
                 index++
             }
         }).catch(error => console.log(error))
-    })
+    }).catch(error => console.log(error))
 }
 
 const gatherData = index => {
-    fetch(`https://league-of-legends-champions.p.rapidapi.com/champions/en-us/${index.path[0].id}`, {
+    fetch(`https://league-of-legends-champions.p.rapidapi.com/champions/en-us/${index.path[0].id.replace(/[ .']/g, '-').replace(/-{2,}/, '-')}/`, {
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "league-of-legends-champions.p.rapidapi.com",
