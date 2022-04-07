@@ -24,6 +24,8 @@ const sendToChampionPage = event => {
 }
 
 const sendToChampionList = event => {
+    const skinIcons = document.querySelectorAll('.splash-icon');
+
     header.style.display = '';
     nav.style.display = '';
     cards.style.display = '';
@@ -33,6 +35,7 @@ const sendToChampionList = event => {
     championAbility.style.display = 'none'
     championSkin.style.display = 'none'
 
+    for (let i = 0; i < skinIcons.length; i++) skinIcons[i].parentElement.style.display = 'flex'
     for (let i = 0; i < abilityBtns.length; i++) {
         if (!abilityBtns[0].parentElement.classList.contains('ability-up-animation')
         && abilityBtns[i].parentElement.classList.contains('ability-up-animation')) {
@@ -77,12 +80,12 @@ const changeAbilitySection = (index, event) => {
     })
 }
 
-skinBtns.forEach(btn => btn.addEventListener('click', event => {
+const skinBtnScroll = event => {
     event.target.scrollIntoView({behavior: 'smooth', block: 'center', inline: 'center'})
-    console.log(event.target, event.target.className)
+
     if (event.target.className == 'skin-btn') document.querySelector('.champion-splash').src = event.target.firstElementChild.src
     else document.querySelector('.champion-splash').src = event.target.parentElement.querySelector('img').src 
-}))
+}
 
 abilityBtns.forEach(btn => btn.addEventListener('click', event => {
     const championName = document.querySelector('.champion-container').lastElementChild
@@ -106,6 +109,8 @@ window.addEventListener('resize', () => {
     document.querySelector('.skin-contain').style.height = document.querySelector('.champion-splash').offsetHeight + 'px'
 })
 
+skinBtns.forEach(btn => btn.addEventListener('click', skinBtnScroll))
 champBtn.addEventListener('click', sendToChampionList)
 
 export { sendToChampionPage as default }
+export { skinBtnScroll }
