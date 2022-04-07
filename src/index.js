@@ -113,7 +113,6 @@ const gatherData = index => {
         }
     }).then(response => response.json())
     .then(data => {
-        console.log(data, data.champion[0]['skins'].length)
         const champData = data.champion[0]
         const links = document.querySelectorAll('.link');
         const linkArray = []
