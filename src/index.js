@@ -1,4 +1,5 @@
 import  sendToChampionPage  from './displayData'
+import { skinBtnScroll } from './displayData';
 
 const loadGridDivs = () => {
     const selectParent = document.querySelector('.contain');
@@ -112,6 +113,7 @@ const gatherData = index => {
         }
     }).then(response => response.json())
     .then(data => {
+        console.log(data, data.champion[0]['skins'].length)
         const champData = data.champion[0]
         const links = document.querySelectorAll('.link');
         const linkArray = []
@@ -120,9 +122,26 @@ const gatherData = index => {
         
         champData['links'].sort((a, b) => a.title.length - b.title.length)
         linkArray.push(champData['links'])
+        
         for (let i = 0; i < links.length; i++) {
             links[i].href = linkArray[0][i].href
         }
+        for (let i = 0; i <= champData['skins'].length; i++) {
+            if (document.querySelector('.skin-btns').children.length < champData['skins'].length) {
+                const div = document.createElement('div');
+                const img = document.createElement('img');
+                const h5 = document.createElement('h5');
+                
+                div.classList.add('skin-btn');
+                img.classList.add('splash-icon');
+                
+                document.querySelector('.skin-btns').append(div);
+                div.append(img);
+                div.append(h5);
+                div.addEventListener('click', skinBtnScroll)
+            }
+        }
+
         document.querySelector('.blur-splash').src = champData['champion_splash']
         document.querySelector('.champ-splash').src = champData['champion_splash']
         document.querySelector('.champion-container').firstElementChild.innerText = champData['champion_title'].toUpperCase()
@@ -178,9 +197,10 @@ const gatherData = index => {
                 if (champData['skins'][i]) skinIcons[i].src = champData['skins'][i].imageUrl
                 if (champData['skins'][i].name && champData['skins'][i].name == 'default') skinIcons[0].parentElement.lastElementChild.innerText = champData['champion_name'].toUpperCase()
                 else if (champData['skins'][i].name) skinIcons[i].parentElement.lastElementChild.innerText = champData['skins'][i].name
-            }  else if (champData['champion_name'].includes(`${champData['champion_name']}`) == true) {
+            } else if (!skinIcons[i].parentElement.querySelector('h5').innerText.includes(`${champData['champion_name'].toUpperCase()}`)) {
                 skinIcons[i].parentElement.style.display = 'none'
-            } 
+            }
+
             if (champData['skins'].length > skinIcons.length && btns.lastElementChild.style.display == 'none' && btns.lastElementChild.previousElementSibling.style.display == 'none') {
                 btns.lastElementChild.style.display = ''
                 btns.lastElementChild.previousElementSibling.style.display = ''
