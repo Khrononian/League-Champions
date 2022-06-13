@@ -670,6 +670,7 @@ a:hover .imgs {
         width: 96%;
         grid-template-columns: repeat(auto-fit, minmax(147px, 17%));
         gap: .5rem;
+        justify-content: space-around;
     }
 
     .card, .card > * {
