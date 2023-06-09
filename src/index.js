@@ -105,7 +105,7 @@ const loadGridDivs = () => {
 }
 
 const gatherData = index => {
-    fetch(`https://league-of-legends-champions.p.rapidapi.com/champions/en-us/${index.path[0].id.replace(/[ .']/g, '-').replace(/-{2,}/, '-')}/`, {
+    fetch(`https://league-of-legends-champions.p.rapidapi.com/champions/en-us/${index.target.id.replace(/[ .']/g, '-').replace(/-{2,}/, '-')}/`, {
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "league-of-legends-champions.p.rapidapi.com",
@@ -209,7 +209,7 @@ const gatherData = index => {
             }
         }
     }).catch(error => console.log(error))
-    return index.path[0].id
+    return index.target.id
 }
 
 window.addEventListener('load', loadGridDivs)
