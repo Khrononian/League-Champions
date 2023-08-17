@@ -7,3 +7,5 @@ Built with:
 * CSS
 * JavaScript
 * API
+
+<a href='https://leagueoflegendsna.netlify.app/'>Live Demo</a>
